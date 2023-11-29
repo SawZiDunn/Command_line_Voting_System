@@ -8,7 +8,7 @@ ADMIN_PASSWORD = "Admin07"
 
 def main():
     try:
-        option = eval(input("\nPress 1 to Register\nPress 2 to Log In\nPress 3 to Exit"))
+        option = eval(input("\nPress 1 to Register\nPress 2 to Log In\nPress 3 to Exit\n"))
         if option == 1:
             register()
         elif option == 2:
@@ -29,19 +29,26 @@ def register():
     password = input("Password: ")
     confirmation = input("Confirm Password: ")
     if password != confirmation:
+        print("\n=====================")
         print("Password does not match!")
+        print("======================")
         main()
+
     # list comprehension
     elif username.lower() in [user["username"].lower() for user in users]:
+        print("\n=====================")
         print("Username already exits!")
+        print("=====================")
         main()
 
     try:
         with open("users.csv", "a", newline="\n") as file:
             writer = csv.DictWriter(file, fieldnames=["username", "password"])
             writer.writerow({"username": username, "password": password})
+            print("\n=====================")
             print("Registration Complete!")
-            main()
+            print("=====================")
+        main()
 
     except FileNotFoundError:
         sys.exit("File is not found!")
@@ -50,6 +57,7 @@ def register():
 def log_in():
     users: list = read_data("users.csv")
     players: list = read_data("players.csv")
+    print(users)
 
     username = input("Username: ")
     password = input("Password: ")
@@ -60,7 +68,9 @@ def log_in():
     for user in users:
         if user["username"] == username and user["password"] == password:
             user_option(players)
+    print("\n=====================")
     print("You are not registered!")
+    print("=====================")
     main()
 
 
@@ -69,7 +79,7 @@ def admin_option(players):
         try:
             option = eval(
                 input("\nPress 1 to view player list\nPress 2 to add players\nPress 3 to remove players\nPress 4 to "
-                      "Reset All Data\nPress 5 to Exit"))
+                      "Reset All Data\nPress 5 to Exit\n"))
 
             if option == 1:
                 view_players(players)
