@@ -23,7 +23,7 @@ def test_reset_data():
     assert dic_array[4]["Vote"] == 0
 
 
-def test_remove_data(monkeypatch):
+def test_remove_player(monkeypatch):
     global dic_array
     monkeypatch.setattr('builtins.input', lambda _: "5")
     remove_player(dic_array)

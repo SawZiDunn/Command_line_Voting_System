@@ -57,7 +57,6 @@ def register():
 def log_in():
     users: list = read_data("users.csv")
     players: list = read_data("players.csv")
-    print(users)
 
     username = input("Username: ")
     password = input("Password: ")
